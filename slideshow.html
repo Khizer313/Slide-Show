@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>SLIDE SHOW</title>
+    <style>
+      /* Slider container */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "poppins", sans-serif;
+      }
+      .container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1em;
+        margin-top: 3em;
+        
+      }
+      .images {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 60vh;
+        width: 80vw;
+        overflow: hidden;
+      }
+      .images img:nth-child(1) {
+        display: none;
+      }
+      .images img:nth-child(3) {
+        display: none;
+      }
+      .images img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .circles {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .fa-circle {
+        color: orangered;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="images">
+        <img
+          src="https://picsum.photos/id/237/1000/500"
+          alt="image1"
+          id="f-img"
+        />
+        <img
+          src="https://picsum.photos/id/255/1000/500"
+          alt="image2"
+          id="sec-img"
+        />
+        <img
+          src="https://picsum.photos/id/242/1000/500"
+          id="three-img"
+          alt="image3"
+        />
+      </div>
+      <div class="circles">
+        <i class="fa-solid fa-circle fa-one" onclick="myFun()"></i>
+        <i
+          class="fa-solid fa-circle fa-two"
+          style="color: #333"
+          onclick="myFunTwo()"
+        ></i>
+        <i class="fa-solid fa-circle fa-three" onclick="myFunThree()"></i>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      var tl = gsap.timeline();
+      tl.from(".images", {
+        y: 1000,
+        delay: 0.3,
+      });
+      tl.from(".fa-solid", {
+        y: -1000,
+        opacity: 0,
+        stagger: 0.2,
+      });
+      tl.to(".fa-solid", {
+        y: 40,
+        repeat: 1,
+        duration: 0.2,
+        transition: "smooth",
+        yoyo: true,
+        stagger: 0.2,
+      });
+
+      var fImg = document.querySelector("#f-img");
+      var faOne = document.querySelector(".fa-one");
+      var secImg = document.querySelector("#sec-img");
+      var faTwo = document.querySelector(".fa-two");
+      var threeImg = document.querySelector("#three-img");
+      var faThree = document.querySelector(".fa-three");
+      const myFun = () => {
+        var tl = gsap.timeline();
+        tl.from("#f-img", {
+          scale: 1.2,
+          delay: 0.3,
+        });
+        fImg.style.display = "block";
+        faOne.style.color = "#333";
+        secImg.style.display = "none";
+        faTwo.style.color = "orangered";
+        threeImg.style.display = "none";
+        faThree.style.color = "orangered";
+      };
+
+      const myFunTwo = () => {
+        var tl = gsap.timeline();
+        tl.from("#sec-img", {
+        //   scale: 1.2,
+          delay: 0.1,
+          x:-2000,
+          transition:'ease-in-out'
+          
+        });
+
+        fImg.style.display = "none";
+        faOne.style.color = "orangered";
+        secImg.style.display = "block";
+        faTwo.style.color = "#333";
+        threeImg.style.display = "none";
+        faThree.style.color = "orangered";
+      };
+
+      const myFunThree = () => {
+        var tl = gsap.timeline();
+        tl.from("#three-img", {
+          scale: 1.2,
+          delay: 0.3,
+        });
+
+        fImg.style.display = "none";
+        faOne.style.color = "orangered";
+        secImg.style.display = "none";
+        faTwo.style.color = "orangered";
+        threeImg.style.display = "block";
+        faThree.style.color = "#333";
+      };
+    </script>
+  </body>
+</html>
